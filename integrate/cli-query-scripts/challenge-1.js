@@ -10,9 +10,16 @@ const DB_PATH = path.join(__dirname, '..', 'chinook.sqlite');
 
 const db = new sqlite3.Database(DB_PATH);
 
-const userInput = {};
+const userInput = {
+  firstName: process.argv[2],
+};
 
-const queryString = ``;
+const queryString = `
+  SELECT lastname 
+  FROM "employee"
+  where firstname="${userInput.firstName}"`;
+
+// SELECT lastname FROM 'employees' where firstname="Andrew"
 
 db.all(queryString, (err, rows) => {
   if (err) {

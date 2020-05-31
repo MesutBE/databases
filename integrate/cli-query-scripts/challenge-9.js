@@ -10,9 +10,21 @@ const DB_PATH = path.join(__dirname, '..', 'chinook.sqlite');
 
 const db = new sqlite3.Database(DB_PATH);
 
-const userInput = {};
+const userInput = {
+  column: process.argv[2],
+  table: process.argv[3],
+  searchString: process.argv[4],
+  length: process.argv[5],
+};
 
-const queryString = ``;
+const queryString = `
+  SELECT *
+  FROM ${userInput.table}
+  WHERE ${userInput.column}
+  LIKE '%${userInput.searchString}%'
+  LIMIT '${userInput.length}';`
+
+  // SELECT * FROM 'Invoice' where billingcity  LIKE '%o%' LIMIT "10"
 
 db.all(queryString, (err, rows) => {
   if (err) {
