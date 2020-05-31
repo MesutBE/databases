@@ -10,9 +10,18 @@ const DB_PATH = path.join(__dirname, '..', 'chinook.sqlite');
 
 const db = new sqlite3.Database(DB_PATH);
 
-const userInput = {};
+const userInput = {
+  table: process.argv[2],
+  column: process.argv[3],
+  order: process.argv[4],
+};
 
-const queryString = ``;
+const queryString = `
+  SELECT *
+  FROM ${userInput.table}
+  ORDER BY ${userInput.column} ${userInput.order};`
+
+// SELECT * FROM 'Genre' order by name asc
 
 db.all(queryString, (err, rows) => {
   if (err) {
